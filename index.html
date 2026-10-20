@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>House of J&amp;S | Inspire Computing Year 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c79b3b;--gold-light:#f5eddb;--ink:#282720;--muted:#5f5a50;
+  --line:#e9e2d3;--paper:#fbf9f4;--white:#fff;
+  --good:#236747;--good-bg:#eaf5ee;--bad:#a03c34;--bad-bg:#fbefed;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.7;font-size:16px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--white);border-radius:9px;padding:13px 20px;font-size:15px;font-weight:500;transition:border-color .15s,background .15s}
+button:hover{border-color:var(--gold)}
+button:disabled{opacity:.4;cursor:not-allowed}
+header{position:sticky;top:0;z-index:9;background:var(--white);border-bottom:1px solid var(--line);padding:16px clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.brand img{width:52px;height:52px;object-fit:contain;flex-shrink:0}
+.brand small{display:block;color:#a47c25;font-size:11px;letter-spacing:1.5px;font-weight:700}
+.brand b{display:block;font:700 24px 'Playfair Display',serif;white-space:nowrap}
+.brand span{display:block;font-size:12px;letter-spacing:1px;color:#777;text-transform:uppercase}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{border:0;color:#655f53;background:transparent;font-size:14px;padding:10px 14px}
+nav button.active{background:var(--gold-light);color:#926c1e;font-weight:700}
+#menu{display:none;font-size:22px;padding:8px 16px}
+.welcome{display:flex;align-items:center;gap:10px;font-size:13px;color:#926c1e;font-weight:600;margin-left:auto;margin-right:12px;white-space:nowrap;background:var(--gold-light);padding:8px 16px;border-radius:24px}
+.welcome .dot{width:10px;height:10px;border-radius:50%;background:#4caf50;box-shadow:0 0 0 3px #4caf5033}
+.welcome button{font-size:12px;padding:5px 12px;background:#fff;border-color:#e5dcc8;border-radius:20px}
+main{max-width:1440px;margin:auto}
+#hero{padding:60px clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;background:radial-gradient(circle at 80% 15%,#f5e9ca 0,transparent 32%),linear-gradient(120deg,#fff,#fbf8ef);min-height:460px}
+label,.kicker{color:#9b7425;letter-spacing:1.5px;font-size:12px;font-weight:700}
+h1{font:800 clamp(46px,5.5vw,72px)/1.05 'Playfair Display',serif;letter-spacing:-1px;margin:25px 0 20px}
+h1 em{color:#b4872b;font-style:normal}
+#hero p{font-size:17px;color:var(--muted);line-height:1.8;max-width:540px}
+.gold{background:var(--gold);color:white;border-color:var(--gold);box-shadow:0 6px 15px #c79b3b30}
+.meta{font-size:13px!important}
+.art{min-height:300px;position:relative;display:grid;place-items:center}
+.sun{position:absolute;width:270px;height:270px;border-radius:50%;background:linear-gradient(135deg,#f5df9c,#c99c3c);right:8%;top:0}
+.artcard{z-index:1;background:#282923;color:white;padding:25px 30px;width:290px;min-height:300px;box-shadow:17px 20px 0 #d8bd78;transform:rotate(2deg)}
+.artcard small{color:#dfc47e;letter-spacing:1.5px;font-size:11px}
+.symbol{font-size:60px;color:#d9b456;margin-top:28px}
+.artcard h2{font:700 36px/1.1 'Playfair Display',serif;margin:0 0 18px}
+.artcard hr{width:45px;margin-left:0;border:0;height:2px;background:#d7b052}
+.artcard p{font-size:13px!important;color:#ccc!important}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0 clamp(20px,8vw,120px);background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.stats div{text-align:center;padding:22px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font:700 30px 'Playfair Display',serif;color:#a77d25}
+.stats span{font-size:13px;color:var(--muted)}
+#view{padding:55px clamp(18px,8vw,120px) 80px;min-height:420px}
+.head{margin-bottom:28px}
+.head h2{font:700 42px 'Playfair Display',serif;margin:10px 0}
+.head p,.muted{font-size:15px;line-height:1.8;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:18px}
+.card{display:flex;flex-direction:column;min-height:220px}
+.num{background:var(--gold-light);color:#a47b25;border-radius:9px;padding:10px 16px;width:max-content;font-size:13px;font-weight:700;letter-spacing:.5px}
+.card h3,.lesson h3{font:700 24px 'Playfair Display',serif;margin:16px 0 8px;line-height:1.3}
+.card p{font-size:15px;color:var(--muted);line-height:1.7;flex:1}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{font-size:13px;padding:10px 16px}
+.tabs button.active{background:#292a24;color:white;border-color:#292a24}
+.lesson{border:1px solid #eee6d6;padding:20px;border-radius:10px;margin:12px 0}
+.lesson p{font-size:16px;line-height:1.85;color:#5f5a50;margin:0}
+.vocab{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.word{background:#faf7ef;border:1px solid #f0e7d4;padding:16px;border-radius:9px;font-size:15px;line-height:1.6}
+.word b{display:block;color:#926c1e;margin-bottom:6px;font-size:16px}
+.callout{padding:16px 20px;background:#f7f0de;border-left:4px solid var(--gold);font-size:15px;line-height:1.7;color:#6d592b;margin:18px 0;border-radius:6px}
+.q{border:1px solid var(--line);background:white;border-radius:12px;padding:22px;margin:14px 0}
+.qtop{font-size:12px;letter-spacing:.8px;color:#987128;font-weight:700;margin-bottom:14px;line-height:1.6}
+.q h3{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600}
+.options{display:grid;gap:10px}
+.opt{border:1px solid var(--line);border-radius:9px;padding:13px 16px;font-size:15px;display:flex;gap:10px;align-items:center;cursor:pointer;line-height:1.5}
+.opt:hover{background:#fbf8ef;border-color:#d9c99a}
+.opt input{accent-color:#b68a2d;width:18px;height:18px;flex-shrink:0}
+.q input[type=text],.q textarea,.q select{width:100%;padding:13px 16px;border:1.5px solid #ded6c5;border-radius:9px;background:#fffdf9;font:15px 'DM Sans',sans-serif;line-height:1.5}
+.q input[type=text]:focus,.q textarea:focus,.q select:focus{outline:none;border-color:var(--gold);background:#fff}
+.q textarea{min-height:90px;resize:vertical}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pairs .word{font-size:15px}
+.pairs .word select{margin-top:6px;font-size:14px;padding:10px 12px}
+.feedback{padding:14px 16px;border-radius:8px;font-size:14px;line-height:1.7;margin-top:14px}
+.good{background:var(--good-bg);color:var(--good)}
+.bad{background:var(--bad-bg);color:var(--bad)}
+.timer{background:#282923;color:#f4d783;padding:14px 22px;border-radius:10px;font-weight:700;font-size:22px;letter-spacing:2px}
+.bar{height:8px;background:#eee7d8;border-radius:9px;overflow:hidden;margin:18px 0}
+.bar span{display:block;background:var(--gold);height:100%;transition:width .3s}
+.result{font:700 56px 'Playfair Display',serif;color:#a77d25}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.three div{background:#faf7ef;border-radius:9px;padding:18px}
+.three b{display:block;font-size:26px}
+.three span{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+footer{background:#25261f;color:white;padding:36px clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:16px 25px}
+footer b{font:700 24px 'Playfair Display',serif}
+footer span{color:#c9b77f;text-transform:uppercase;font-size:12px}
+footer p{font-size:14px;color:#ccc;margin:0;line-height:1.6}
+.links{display:flex;gap:18px;flex-wrap:wrap}
+.links a{font-size:13px;color:#e5cd88;text-decoration:none}
+.links a:hover{text-decoration:underline}
+footer small{grid-column:1/-1;border-top:1px solid #ffffff22;padding-top:16px;color:#aaa;font-size:12px;line-height:1.6}
+.login-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,#f5e9ca 0,transparent 45%),#fbf9f4;display:flex;align-items:center;justify-content:center;z-index:999;padding:20px}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:44px 38px;max-width:460px;width:100%;text-align:center;box-shadow:0 25px 70px rgba(0,0,0,0.12)}
+.login-box img{width:80px;height:80px;object-fit:contain;margin-bottom:10px}
+.login-box .kicker{display:block;margin-bottom:8px;font-size:12px}
+.login-box h2{font:700 34px 'Playfair Display',serif;margin:0 0 8px;color:var(--ink)}
+.login-box p{font-size:15px;color:var(--muted);margin:0 0 26px;line-height:1.6}
+.login-box input{width:100%;padding:15px 18px;border:1.5px solid var(--line);border-radius:11px;font:16px 'DM Sans',sans-serif;margin-bottom:14px;background:#fffdf9}
+.login-box input:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px #c79b3b15}
+.login-box .gold{width:100%;padding:16px;font-weight:700;font-size:16px;margin-top:6px}
+.login-error{color:var(--bad);font-size:14px;min-height:20px;margin-bottom:8px;font-weight:600}
+.login-hint{font-size:13px;color:#a47c25;margin-top:20px;letter-spacing:.3px;line-height:1.5}
+.review-q{margin:16px 0}
+.review-block{margin-top:16px}
+.review-line{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed #eee6d6;font-size:15px;align-items:flex-start;flex-wrap:wrap}
+.review-line:last-child{border-bottom:0}
+.review-label{font-weight:700;color:#926c1e;min-width:150px;flex-shrink:0;font-size:12px;text-transform:uppercase;letter-spacing:.8px;padding-top:3px}
+.review-ans{flex:1;line-height:1.7;min-width:220px;word-break:break-word;font-size:15px}
+.review-ans.bad{color:var(--bad);font-weight:600}
+.review-ans.good{color:var(--good);font-weight:600}
+.review-ans.correct{color:var(--good);font-weight:700}
+.review-why{margin-top:16px;padding:14px 18px;background:#faf7ef;border-radius:10px;border-left:4px solid var(--gold);font-size:14px;line-height:1.75;color:#5f5a50}
+.text-good{color:var(--good);font-weight:700}
+.text-bad{color:var(--bad);font-weight:700}
+@media(max-width:850px){
+  header{flex-wrap:wrap}
+  #menu{display:block;margin-left:auto}
+  nav{display:none;flex-direction:column;width:100%;order:5}
+  nav.open{display:flex}
+  nav button{text-align:left;font-size:15px;padding:12px 16px}
+  #hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .welcome{margin-left:auto;margin-right:0;order:4}
+}
+@media(max-width:560px){
+  body{font-size:15px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .grid,.vocab,.three,.pairs{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr}
+  .links{grid-column:1}
+  h1{font-size:42px}
+  .head h2{font-size:32px}
+  .card h3,.lesson h3{font-size:21px}
+  .welcome{width:100%;justify-content:center;order:4;margin:10px 0 0 0}
+  .login-box{padding:34px 26px}
+  .login-box h2{font-size:28px}
+  .review-label{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-box">
+    <img src="logo1.png" onerror="this.style.display='none'" alt="J&amp;S logo">
+    <label class="kicker">HOUSE OF J&amp;S</label>
+    <h2>Student Login</h2>
+    <p>Enter your name and class password to begin Year 5.</p>
+    <form id="loginForm" autocomplete="off">
+      <input type="text" id="studentNameInput" placeholder="Student Name" required maxlength="40">
+      <input type="password" id="studentPassInput" placeholder="Class Password" required>
+      <div id="loginError" class="login-error"></div>
+      <button type="submit" class="gold">Enter Learning Hub →</button>
+    </form>
+    <div class="login-hint">🔑 Class password is provided by your teacher</div>
+  </div>
+</div>
+
+<header>
+  <div class="brand">
+    <img src="logo1.png" onerror="this.style.display='none'" alt="J&amp;S logo">
+    <div>
+      <small>LEARN • CREATE • GROW</small>
+      <b>House of J&amp;S</b>
+      <span>Computer Training Center</span>
+    </div>
+  </div>
+  <div class="welcome" id="welcomeChip" style="display:none">
+    <span class="dot"></span>
+    <span id="welcomeName">Student</span>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <button id="menu">☰</button>
+  <nav>
+    <button data-view="home" class="active">Home</button>
+    <button data-view="study">Study Notes</button>
+    <button data-view="practice">Workbook Practice</button>
+    <button data-view="exam">Unit Exams</button>
+    <button data-view="progress">My Progress</button>
+  </nav>
+</header>
+
+<main>
+  <section id="hero">
+    <div>
+      <label>YEAR 5 • PEARSON iPRIMARY</label>
+      <h1>Inspire Computing <em>Year 5.</em></h1>
+      <p>Creative media, networks, online security, programming and spreadsheets — building confident digital citizens through hands-on learning.</p>
+      <button class="gold" onclick="go('study')">Explore Study Notes ↗</button>
+      <button onclick="go('exam')">Start an Exam</button>
+      <p class="meta">✦ 6 units　 ◷ 60-minute exams　 ✓ Instant feedback</p>
+    </div>
+    <div class="art">
+      <div class="sun"></div>
+      <div class="artcard">
+        <small>J&amp;S LEARNING HUB</small>
+        <div class="symbol">⌘</div>
+        <h2>Think. Code.<br>Explore.</h2>
+        <hr>
+        <p>Curiosity is your superpower.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><b>06</b><span>Study units</span></div>
+    <div><b>60</b><span>Question parts</span></div>
+    <div><b>80</b><span>Marks per exam</span></div>
+    <div><b>01:00</b><span>Hour timer</span></div>
+  </section>
+
+  <section id="view"></section>
+</main>
+
+<footer>
+  <div>
+    <b>House of J&amp;S</b>
+    <span>Computer Training Center</span>
+    <p style="margin-top:8px">Learning with confidence, one skill at a time.</p>
+  </div>
+  <div class="links">
+    <a target="_blank" rel="noopener" href="https://www.pearson.com/content/dam/one-dot-com/one-dot-com/international-schools/pdfs/primary-curriculum/iprimary/InspireComputing/InspireComputing-Y5-WB-Answers.pdf">Official Pearson Year 5 Workbook Answers ↗</a>
+    <a target="_blank" rel="noopener" href="https://www.scribd.com/document/886966633/Inspire-Computing-Internation-Year-5-WB">Year 5 Workbook reference ↗</a>
+  </div>
+  <small>Independent learning companion. Pearson materials remain the property of their copyright holder.</small>
+</footer>
+
+<script>
+const CLASS_PASSWORD = 'HJS2026';
+let studentName = localStorage.getItem('jsStudentName_Y5') || '';
+const loginOverlay = document.getElementById('loginOverlay');
+const loginForm = document.getElementById('loginForm');
+const loginError = document.getElementById('loginError');
+const welcomeChip = document.getElementById('welcomeChip');
+const welcomeName = document.getElementById('welcomeName');
+
+function applyLoginState() {
+  if (studentName) {
+    loginOverlay.classList.add('hidden');
+    welcomeChip.style.display = 'flex';
+    welcomeName.textContent = studentName;
+  } else {
+    loginOverlay.classList.remove('hidden');
+    welcomeChip.style.display = 'none';
+  }
+}
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('studentNameInput').value.trim();
+  const pass = document.getElementById('studentPassInput').value;
+  loginError.textContent = '';
+  if (!name) { loginError.textContent = 'Please enter your name.'; return; }
+  if (pass !== CLASS_PASSWORD) { loginError.textContent = '❌ Incorrect password. Please check with your teacher.'; return; }
+  studentName = name;
+  localStorage.setItem('jsStudentName_Y5', studentName);
+  document.getElementById('studentPassInput').value = '';
+  applyLoginState();
+  go('home');
+});
+function logout() {
+  if (!confirm('Log out and switch student?')) return;
+  studentName = '';
+  localStorage.removeItem('jsStudentName_Y5');
+  loginOverlay.classList.remove('hidden');
+  welcomeChip.style.display = 'none';
+  document.getElementById('studentNameInput').value = '';
+  document.getElementById('studentPassInput').value = '';
+  loginError.textContent = '';
+}
+
+/* YEAR 5 UNITS */
+const embeddedUnits = [
+{
+  id:1,title:"Creative Media – Stop Motion Animation & Green Screen",
+  sub:"Telling stories through frame-by-frame animation and chroma key video",
+  lessons:[
+    ["What is animation?","Animation creates the illusion of movement by showing a sequence of still images quickly. Each image is called a frame, and many frames per second are needed for smooth motion."],
+    ["History of animation","From early zoetropes to flipbooks and modern CGI, animators have used similar principles for over a century — small changes between frames create apparent motion."],
+    ["Stop motion basics","Stop motion captures one photograph per small movement, then plays the photographs in order. Objects appear to move on their own when the frames are played quickly."],
+    ["Frames per second","Frames per second (FPS) is the number of images shown each second. Higher FPS creates smoother motion; lower FPS creates a jerky, stylistic look."],
+    ["Storyboarding","A storyboard is a sequence of simple sketches showing each shot, camera angle and action. It helps plan the story before filming begins."],
+    ["Props and settings","Props are objects characters interact with; the set is the scene where filming happens. Keep the camera and set steady so each frame aligns."],
+    ["Onion skinning","Onion skinning shows the previous and next frame faintly behind the current one. This helps animators keep the movement smooth and aligned."],
+    ["Green screen filming","Green screen (chroma key) records actors in front of a plain green or blue background. Editing software removes that colour so a different background can be added."],
+    ["Lighting and audio","Even, soft lighting reduces shadows that cause uneven chroma key. Clear dialogue, sound effects and music should be added in an editing app."],
+    ["Editing and exporting","Arrange clips, replace the green background, add titles and captions, then export the finished film. Review it before sharing."]
+  ],
+  vocab:[["Frame","A single still image in an animation."],["FPS","Frames per second — how many frames play each second."],["Stop motion","Animating by photographing small movements frame by frame."],["Storyboard","A sequence of sketches planning each shot."],["Onion skinning","Shows neighbouring frames faintly for smooth movement."],["Green screen","A plain coloured background replaced during editing."],["Chroma key","Editing technique that removes a specific colour."],["Prop","An object used by characters on set."],["Set","The location where a scene is filmed."],["Export","Saving the finished media file."]],
+  questions:[
+    {type:"mcq",q:"What is a frame in animation?",opts:["A single still image","A type of camera","A sound effect"],a:0,why:"A frame is one still image; many frames together create motion."},
+    {type:"mcq",q:"What does FPS stand for?",opts:["Frames per second","Fast picture speed","Film playback speed"],a:0,why:"FPS = frames per second — how many images play each second."},
+    {type:"mcq",q:"What is stop motion?",opts:["Photographing small movements frame by frame","Drawing animation digitally","Recording live action in one shot"],a:0,why:"Stop motion captures one photograph per small movement."},
+    {type:"mcq",q:"Why is a storyboard useful?",opts:["It plans the shots before filming","It replaces the camera","It adds sound automatically"],a:0,why:"A storyboard plans each shot and the story order."},
+    {type:"mcq",q:"What does onion skinning show?",opts:["Faint neighbouring frames","The audio track","The colour palette"],a:0,why:"Onion skinning shows previous and next frames faintly for alignment."},
+    {type:"mcq",q:"What is a green screen used for?",opts:["Replacing a background during editing","Adding lighting effects","Recording audio"],a:0,why:"Green screen lets you remove the colour and add another background."},
+    {type:"mcq",q:"What is chroma key?",opts:["Removing a specific colour in editing","Changing frame rate","Adding music"],a:0,why:"Chroma key removes a specific colour (usually green)."},
+    {type:"mcq",q:"What is a prop?",opts:["An object used by characters","A type of camera","A frame rate"],a:0,why:"Props are objects characters interact with on set."},
+    {type:"mcq",q:"What is a set?",opts:["The location where filming happens","The editing software","The export format"],a:0,why:"The set is the scene where filming happens."},
+    {type:"mcq",q:"What does higher FPS do?",opts:["Creates smoother motion","Reduces file size","Removes the background"],a:0,why:"More frames per second creates smoother motion."},
+    {type:"mcq",q:"Why should lighting be even on a green screen?",opts:["To reduce shadows that affect chroma key","To make the screen brighter","To change the frame rate"],a:0,why:"Even lighting reduces shadows that cause uneven colour removal."},
+    {type:"mcq",q:"What should you do before exporting a video?",opts:["Review it for mistakes","Delete the source files","Stop the audio"],a:0,why:"Review the finished film before exporting."},
+    {type:"mcq",q:"What is a disadvantage of low FPS?",opts:["Motion looks jerky","File size is too large","Audio is missing"],a:0,why:"Lower FPS creates a jerky look; some animators use it stylistically."},
+    {type:"mcq",q:"Why should the camera stay steady during stop motion?",opts:["So frames align properly","To keep the audio clear","To add effects"],a:0,why:"A steady camera keeps each frame aligned with the previous one."},
+    {type:"mcq",q:"What does exporting a video mean?",opts:["Saving the finished media file","Deleting the project","Removing frames"],a:0,why:"Exporting saves the finished project in a usable format."},
+    {type:"mcq",q:"Which tool adds music and dialogue?",opts:["An audio editing tool","A green screen","A storyboard"],a:0,why:"Audio is added using an editing app's sound tools."},
+    {type:"mcq",q:"Why is a plain background important for chroma key?",opts:["The editor can cleanly remove it","It reflects more light","It changes colours"],a:0,why:"A plain, even colour removes cleanly during chroma key."},
+    {type:"mcq",q:"What do you call the plan for each shot in an animation?",opts:["A storyboard","A frame","An export"],a:0,why:"A storyboard plans shots and story order."},
+    {type:"mcq",q:"Why do animators use many frames?",opts:["To create the illusion of movement","To make files smaller","To keep audio in sync"],a:0,why:"Many frames shown quickly create apparent motion."},
+    {type:"mcq",q:"What should you check after replacing a green background?",opts:["Edges look clean and natural","The frame rate increased","The file was deleted"],a:0,why:"Check that edges blend correctly after removing the green screen."},
+    {type:"fill",q:"A single still image in an animation is called a __________.",opts:["Frame","Prop","Set"],a:"Frame",why:"Frame: a single still image in an animation."},
+    {type:"fill",q:"The number of frames played each second is called __________.",opts:["FPS","Chroma key","Export"],a:"FPS",why:"FPS: frames per second."},
+    {type:"fill",q:"__________ motion animates by photographing small movements.",opts:["Stop","Chroma","Green"],a:"Stop",why:"Stop motion photographs small movements frame by frame."},
+    {type:"fill",q:"A __________ plans each shot before filming.",opts:["Storyboard","Prop","Frame"],a:"Storyboard",why:"Storyboard: sequence of sketches planning each shot."},
+    {type:"fill",q:"__________ skinning shows neighbouring frames faintly.",opts:["Onion","Chroma","Green"],a:"Onion",why:"Onion skinning shows previous and next frames faintly."},
+    {type:"fill",q:"A __________ screen is a plain coloured background for chroma key.",opts:["Green","Audio","Frame"],a:"Green",why:"Green screen: a plain coloured background."},
+    {type:"fill",q:"__________ key removes a specific colour during editing.",opts:["Chroma","Onion","Stop"],a:"Chroma",why:"Chroma key: editing technique to remove a specific colour."},
+    {type:"fill",q:"A __________ is an object a character uses on set.",opts:["Prop","Frame","Export"],a:"Prop",why:"Prop: an object used by characters."},
+    {type:"fill",q:"The __________ is where a scene is filmed.",opts:["Set","Frame","Storyboard"],a:"Set",why:"Set: the location where a scene is filmed."},
+    {type:"fill",q:"__________ saves the finished media file.",opts:["Export","Storyboard","Prop"],a:"Export",why:"Export: saving the finished media project."},
+    {type:"tf",q:"A frame is a single still image in an animation.",a:true,why:"Frame: a single still image in an animation."},
+    {type:"tf",q:"Lower FPS always looks smoother than higher FPS.",a:false,why:"Higher FPS creates smoother motion; lower FPS can look jerky."},
+    {type:"tf",q:"Storyboards plan the shots before filming.",a:true,why:"Storyboards plan each shot and the story order."},
+    {type:"tf",q:"Onion skinning shows only the current frame.",a:false,why:"Onion skinning shows neighbouring frames faintly too."},
+    {type:"tf",q:"Chroma key removes a specific colour.",a:true,why:"Chroma key removes a specific colour like green."},
+    {type:"tf",q:"Props are types of cameras.",a:false,why:"Props are objects characters interact with."},
+    {type:"tf",q:"Even lighting helps green screen work cleanly.",a:true,why:"Even lighting reduces shadows that cause uneven removal."},
+    {type:"tf",q:"You should export before reviewing the film.",a:false,why:"Review the finished film before exporting."},
+    {type:"tf",q:"A set is the location where filming happens.",a:true,why:"Set: the location where a scene is filmed."},
+    {type:"tf",q:"FPS measures audio volume.",a:false,why:"FPS measures how many frames play per second."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Frame","A single still image in an animation."],["FPS","Frames per second."],["Stop motion","Animating by photographing small movements."],["Storyboard","Sketches planning each shot."],["Onion skinning","Shows neighbouring frames faintly."],["Green screen","Plain coloured background replaced in editing."],["Chroma key","Removing a specific colour in editing."],["Prop","Object used by characters."],["Set","The location where a scene is filmed."],["Export","Saving the finished media file."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"Explain what a frame is and why many frames are needed for animation.",a:"A frame is a single still image. Many frames shown quickly create the illusion of smooth movement.",why:"A good answer explains that frames are still images shown rapidly."},
+    {type:"short",q:"What is a storyboard? Why is it useful?",a:"A storyboard is a sequence of simple sketches planning each shot. It helps plan the story before filming.",why:"A good answer explains the purpose of planning shots."},
+    {type:"short",q:"What is stop motion animation?",a:"Stop motion photographs small movements one frame at a time, then plays them in order to create the illusion of motion.",why:"A good answer explains the frame-by-frame technique."},
+    {type:"short",q:"What does FPS mean and how does it affect the film?",a:"FPS means frames per second. Higher FPS creates smoother motion; lower FPS creates a jerky look.",why:"A good answer explains the meaning and effect of FPS."},
+    {type:"short",q:"What is onion skinning and how does it help?",a:"Onion skinning shows the previous and next frames faintly behind the current frame, helping keep movement aligned.",why:"A good answer explains the alignment benefit."},
+    {type:"short",q:"What is a green screen and why is it used?",a:"A green screen is a plain coloured background. Editing software removes that colour so a different scene can be placed behind the actor.",why:"A good answer explains chroma key replacement."},
+    {type:"short",q:"Give two tips for filming good stop motion.",a:"Keep the camera steady and use even lighting. Move objects only a small amount between frames.",why:"A good answer gives practical filming tips."},
+    {type:"short",q:"What is the difference between props and a set?",a:"Props are objects characters use; a set is the location where the scene is filmed.",why:"A good answer distinguishes the two concepts."},
+    {type:"short",q:"What should you check before exporting your film?",a:"Check the order of clips, the background replacement edges, titles, sound and captions.",why:"A good answer lists pre-export checks."},
+    {type:"short",q:"What is chroma key?",a:"Chroma key is an editing technique that removes a specific colour (usually green) from footage so a new background can be added.",why:"A good answer defines chroma key accurately."}
+  ]
+},
+{
+  id:2,title:"Programming, Part One",
+  sub:"Algorithms, sequences, loops and events in block coding",
+  lessons:[
+    ["Algorithms","An algorithm is a set of ordered steps to solve a problem. Each step must be clear, precise and unambiguous."],
+    ["Sequences","A sequence is the order in which instructions are carried out. Changing the order can change the result."],
+    ["Programs and blocks","A program is a set of instructions a computer can execute. Block-based languages like Scratch let you connect instruction blocks."],
+    ["Sprites and stage","A sprite is a character or object in a project. The stage is the area where the project runs; a backdrop is its background."],
+    ["Events","Events trigger scripts — for example, clicking the green flag or pressing a key starts a sequence of instructions."],
+    ["Loops","A loop repeats instructions. Repeat blocks run a set number of times; forever blocks continue until the project stops."],
+    ["Conditions","A condition is a test that is either true or false. Conditions are used in if blocks and loops to control behaviour."],
+    ["Debugging","Debugging means finding and fixing problems (bugs) in a program. Test after every change."],
+    ["Variables","A variable is a named place to store a value. Variables can change while the program runs, such as a score."],
+    ["Planning programs","Plan a program by sketching the interface, listing sprites, writing the steps as an algorithm and testing small features first."]
+  ],
+  vocab:[["Algorithm","Ordered steps to solve a problem."],["Sequence","The order instructions are carried out."],["Program","Instructions a computer can execute."],["Sprite","A character or object in a project."],["Stage","The area where a project runs."],["Event","A trigger that starts a script."],["Loop","A structure that repeats instructions."],["Condition","A test that is true or false."],["Debug","Find and fix problems in a program."],["Variable","A named place to store a value."]],
+  questions:[
+    {type:"mcq",q:"What is an algorithm?",opts:["Ordered steps to solve a problem","A type of sprite","A coding app"],a:0,why:"Algorithm: ordered steps to solve a problem."},
+    {type:"mcq",q:"What is a sequence?",opts:["The order instructions run in","A type of block","A screen"],a:0,why:"Sequence: the order in which instructions are carried out."},
+    {type:"mcq",q:"What is a program?",opts:["Instructions a computer can execute","A character","A keyboard"],a:0,why:"Program: instructions a computer can execute."},
+    {type:"mcq",q:"What is a sprite?",opts:["A character or object in a project","The background","An instruction"],a:0,why:"Sprite: a character or object in a project."},
+    {type:"mcq",q:"What is the stage?",opts:["The area where a project runs","A type of sprite","A loop"],a:0,why:"Stage: the area where a project runs."},
+    {type:"mcq",q:"What is an event?",opts:["A trigger that starts a script","A type of variable","A mistake"],a:0,why:"Event: a trigger that starts a script."},
+    {type:"mcq",q:"What does a loop do?",opts:["Repeats instructions","Stops the program","Adds sound"],a:0,why:"Loop: repeats instructions."},
+    {type:"mcq",q:"What is a condition?",opts:["A test that is true or false","A type of loop","A sprite"],a:0,why:"Condition: a test that is true or false."},
+    {type:"mcq",q:"What does debugging mean?",opts:["Finding and fixing problems","Deleting the program","Adding sprites"],a:0,why:"Debugging: finding and fixing program problems."},
+    {type:"mcq",q:"What is a variable?",opts:["A named place to store a value","A type of sprite","A condition"],a:0,why:"Variable: a named place to store a value."},
+    {type:"mcq",q:"Which block runs a script only when a condition is true?",opts:["An if block","A forever block","A stage block"],a:0,why:"An if block runs instructions only when a condition is true."},
+    {type:"mcq",q:"Which event usually starts a Scratch script?",opts:["Clicking the green flag","Closing the app","Deleting a sprite"],a:0,why:"Clicking the green flag is a common event."},
+    {type:"mcq",q:"What is a bug?",opts:["A mistake in a program","A type of block","A screen"],a:0,why:"A bug is a mistake in a program."},
+    {type:"mcq",q:"What does a forever loop do?",opts:["Repeats until the program stops","Runs once","Adds sound"],a:0,why:"A forever loop repeats continuously."},
+    {type:"mcq",q:"What should you do after fixing a bug?",opts:["Test the program again","Delete it","Add more sprites"],a:0,why:"Test the program after every change."},
+    {type:"mcq",q:"Why should programs be planned before coding?",opts:["To understand the steps needed","To save electricity","To add sounds"],a:0,why:"Planning helps you understand the steps before coding."},
+    {type:"mcq",q:"Which is a sequence of steps to make tea?",opts:["Boil water → add tea → pour → stir","Stir → boil water","Pour → boil water"],a:0,why:"A sequence must be in the correct order."},
+    {type:"mcq",q:"What is a backdrop?",opts:["The background of the stage","A type of block","A variable"],a:0,why:"Backdrop: the background of the stage."},
+    {type:"mcq",q:"What does a repeat block do?",opts:["Repeats a set number of times","Runs forever","Adds sound"],a:0,why:"A repeat block runs a set number of times."},
+    {type:"mcq",q:"What is the first step in debugging?",opts:["Identify the mistake","Delete the program","Add sprites"],a:0,why:"First find the mistake, then correct it."},
+    {type:"fill",q:"An __________ is a set of ordered steps to solve a problem.",opts:["Algorithm","Sprite","Stage"],a:"Algorithm",why:"Algorithm: ordered steps to solve a problem."},
+    {type:"fill",q:"A __________ is the order in which instructions run.",opts:["Sequence","Loop","Variable"],a:"Sequence",why:"Sequence: the order instructions run in."},
+    {type:"fill",q:"A __________ is a character or object in a project.",opts:["Sprite","Program","Stage"],a:"Sprite",why:"Sprite: a character or object in a project."},
+    {type:"fill",q:"The __________ is where a project runs.",opts:["Stage","Sprite","Loop"],a:"Stage",why:"Stage: the area where a project runs."},
+    {type:"fill",q:"An __________ is a trigger that starts a script.",opts:["Event","Algorithm","Condition"],a:"Event",why:"Event: a trigger that starts a script."},
+    {type:"fill",q:"A __________ repeats instructions.",opts:["Loop","Variable","Sprite"],a:"Loop",why:"Loop: repeats instructions."},
+    {type:"fill",q:"A __________ is a test that is true or false.",opts:["Condition","Sprite","Event"],a:"Condition",why:"Condition: a test that is true or false."},
+    {type:"fill",q:"__________ means finding and fixing problems in a program.",opts:["Debugging","Looping","Spriting"],a:"Debugging",why:"Debugging: finding and fixing problems."},
+    {type:"fill",q:"A __________ is a named place to store a value.",opts:["Variable","Loop","Condition"],a:"Variable",why:"Variable: a named place to store a value."},
+    {type:"fill",q:"A program is a set of instructions a computer can __________.",opts:["Execute","Delete","Draw"],a:"Execute",why:"Program: instructions a computer can execute."},
+    {type:"tf",q:"An algorithm is a set of ordered steps.",a:true,why:"Algorithm: ordered steps to solve a problem."},
+    {type:"tf",q:"A sequence can be in any random order.",a:false,why:"A sequence is a specific order that affects the result."},
+    {type:"tf",q:"A sprite is the background of the stage.",a:false,why:"A sprite is a character or object; the backdrop is the background."},
+    {type:"tf",q:"An event can start a script.",a:true,why:"Event: a trigger that starts a script."},
+    {type:"tf",q:"A loop can repeat instructions.",a:true,why:"Loop: repeats instructions."},
+    {type:"tf",q:"A condition is always true.",a:false,why:"A condition is a test that can be true or false."},
+    {type:"tf",q:"Debugging means finding and fixing mistakes.",a:true,why:"Debugging: finding and fixing program mistakes."},
+    {type:"tf",q:"A variable can store a value that changes.",a:true,why:"Variables can change while a program runs."},
+    {type:"tf",q:"You should never test a program after fixing a bug.",a:false,why:"Always test the program after each change."},
+    {type:"tf",q:"Planning a program helps you organise steps.",a:true,why:"Planning helps understand the steps needed before coding."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Algorithm","Ordered steps to solve a problem."],["Sequence","The order instructions are carried out."],["Program","Instructions a computer can execute."],["Sprite","A character or object in a project."],["Stage","The area where a project runs."],["Event","A trigger that starts a script."],["Loop","A structure that repeats instructions."],["Condition","A test that is true or false."],["Debug","Find and fix problems in a program."],["Variable","A named place to store a value."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"Explain what an algorithm is and give one example.",a:"An algorithm is a set of ordered steps to solve a problem. Example: a recipe for making a sandwich.",why:"A good answer defines it and gives an example."},
+    {type:"short",q:"Why does the order of instructions matter?",a:"Changing the order can change the result, so steps must be in the correct sequence.",why:"A good answer explains why sequence matters."},
+    {type:"short",q:"What is a sprite? What is the stage?",a:"A sprite is a character or object; the stage is where the project runs.",why:"A good answer defines both terms."},
+    {type:"short",q:"What is an event? Give one example.",a:"An event is a trigger that starts a script. Example: clicking the green flag.",why:"A good answer defines an event with an example."},
+    {type:"short",q:"What does a loop do? Why is it useful?",a:"A loop repeats instructions. It makes programs shorter and easier to update.",why:"A good answer explains the purpose of loops."},
+    {type:"short",q:"What is a condition?",a:"A condition is a test that is either true or false.",why:"A good answer defines a condition."},
+    {type:"short",q:"What is debugging?",a:"Debugging means finding and fixing mistakes in a program.",why:"A good answer defines debugging."},
+    {type:"short",q:"What is a variable? Give one example of its use.",a:"A variable is a named place to store a value that can change. Example: a score in a game.",why:"A good answer defines a variable with an example."},
+    {type:"short",q:"Why should you test a program after making changes?",a:"To check the change works and did not break anything else.",why:"A good answer explains the benefit of re-testing."},
+    {type:"short",q:"Give two things to plan before coding a project.",a:"Sketch the interface and write out the steps as an algorithm before coding.",why:"A good answer gives two planning steps."}
+  ]
+},
+{
+  id:3,title:"Networks and the Internet",
+  sub:"How computers connect, share data and access the web",
+  lessons:[
+    ["What is a network?","A network is two or more devices connected so they can share data and resources. Networks range from a small home Wi-Fi to global infrastructure."],
+    ["LAN and WAN","A LAN (Local Area Network) covers a small area like a home or school. A WAN (Wide Area Network) covers a large area like a country or the world."],
+    ["The Internet","The Internet is the global network of connected computers and devices. It uses agreed rules (protocols) so different devices can communicate."],
+    ["The World Wide Web","The WWW is a collection of linked web pages and resources accessed over the Internet. It is one service that runs on the Internet, not the Internet itself."],
+    ["IP addresses","Every device on a network has an IP address — a unique number that identifies it, like a postal address for data."],
+    ["Data packets","Data is broken into small packets. Each packet carries the destination address, so packets can travel different routes and be reassembled at the destination."],
+    ["Routers and servers","A router directs traffic between networks. A server provides services or data; a client requests it. Websites live on servers."],
+    ["Protocols","Protocols are rules for communication. HTTP/HTTPS for web pages, TCP/IP for sending packets, and DNS turn names into IP addresses."],
+    ["Wi-Fi and wired connections","Wired connections (Ethernet) are usually faster and more stable. Wi-Fi is convenient but can be affected by walls, distance and interference."],
+    ["Staying safe on networks","Use strong passwords, keep software updated and be careful with public Wi-Fi. Encryption protects data in transit."]
+  ],
+  vocab:[["Network","Two or more devices connected to share data."],["LAN","Local Area Network covering a small area."],["WAN","Wide Area Network covering a large area."],["Internet","The global network of connected devices."],["WWW","The collection of linked web pages on the Internet."],["IP address","A unique number identifying a device on a network."],["Packet","A small unit of data sent across a network."],["Router","A device that directs data between networks."],["Server","A computer that provides services or data."],["Protocol","Agreed rules for communication."]],
+  questions:[
+    {type:"mcq",q:"What is a network?",opts:["Devices connected to share data","A type of cable","A web page"],a:0,why:"Network: two or more devices connected to share data."},
+    {type:"mcq",q:"What does LAN stand for?",opts:["Local Area Network","Large Access Node","Linked Area Network"],a:0,why:"LAN = Local Area Network."},
+    {type:"mcq",q:"What does WAN stand for?",opts:["Wide Area Network","Wireless Access Node","Wired Area Network"],a:0,why:"WAN = Wide Area Network."},
+    {type:"mcq",q:"What is the Internet?",opts:["The global network of connected devices","A single website","A type of email"],a:0,why:"The Internet is the global network of devices."},
+    {type:"mcq",q:"What is the WWW?",opts:["The collection of linked web pages","The Internet's power supply","A network cable"],a:0,why:"WWW is the web of linked pages accessed via the Internet."},
+    {type:"mcq",q:"What is an IP address?",opts:["A unique number identifying a device","A type of web browser","A password"],a:0,why:"IP address: unique number identifying a device."},
+    {type:"mcq",q:"Why is data broken into packets?",opts:["To travel efficiently across networks","To save battery","To make web pages colour"],a:0,why:"Small packets travel efficiently and reassemble at the destination."},
+    {type:"mcq",q:"What does a router do?",opts:["Directs data between networks","Prints documents","Stores videos"],a:0,why:"Routers direct traffic between networks."},
+    {type:"mcq",q:"What is a server?",opts:["A computer that provides services or data","A type of cable","A web page"],a:0,why:"Servers provide services or data; clients request them."},
+    {type:"mcq",q:"What is a protocol?",opts:["Agreed rules for communication","A type of network","A web browser"],a:0,why:"Protocol: agreed rules for communication."},
+    {type:"mcq",q:"Which is usually faster and more stable?",opts:["A wired Ethernet connection","Public Wi-Fi","Mobile hotspot"],a:0,why:"Wired connections are usually faster and more stable."},
+    {type:"mcq",q:"What does DNS do?",opts:["Turns names into IP addresses","Blocks spam","Stores passwords"],a:0,why:"DNS translates domain names into IP addresses."},
+    {type:"mcq",q:"What is HTTPS?",opts:["An encrypted protocol for web pages","A type of router","A spreadsheet formula"],a:0,why:"HTTPS encrypts communication between a browser and a website."},
+    {type:"mcq",q:"Which is a difference between the Internet and WWW?",opts:["The WWW is one service on the Internet","They are identical","The WWW is a device"],a:0,why:"The Internet is the network; the WWW is a service on it."},
+    {type:"mcq",q:"What does encryption do?",opts:["Protects data in transit","Makes web pages faster","Deletes data"],a:0,why:"Encryption scrambles data so only authorised parties can read it."},
+    {type:"mcq",q:"What does the term 'client' mean?",opts:["A device requesting data from a server","A type of cable","A network cable"],a:0,why:"Clients request data; servers provide it."},
+    {type:"mcq",q:"Which covers a larger area — LAN or WAN?",opts:["WAN","LAN","They cover the same area"],a:0,why:"WAN covers a much larger area than LAN."},
+    {type:"mcq",q:"Why is public Wi-Fi sometimes risky?",opts:["Traffic may be intercepted","It always damages devices","It removes passwords"],a:0,why:"Public Wi-Fi traffic may be intercepted, so use encryption."},
+    {type:"mcq",q:"Which of these is a service that runs on the Internet?",opts:["The World Wide Web","A keyboard","An IP address"],a:0,why:"The WWW is a service on the Internet."},
+    {type:"mcq",q:"What does a packet contain?",opts:["The destination address and data","Only a password","Only a picture"],a:0,why:"Packets carry the destination address so they can be reassembled."},
+    {type:"fill",q:"A __________ connects devices so they can share data.",opts:["Network","Router","Packet"],a:"Network",why:"Network: two or more connected devices."},
+    {type:"fill",q:"A __________ covers a small area like a home.",opts:["LAN","WAN","WWW"],a:"LAN",why:"LAN = Local Area Network."},
+    {type:"fill",q:"A __________ covers a large area like a country.",opts:["WAN","LAN","URL"],a:"WAN",why:"WAN = Wide Area Network."},
+    {type:"fill",q:"The __________ is the global network of connected devices.",opts:["Internet","LAN","Router"],a:"Internet",why:"Internet: the global network of connected devices."},
+    {type:"fill",q:"An __________ address uniquely identifies a device on a network.",opts:["IP","LAN","WAN"],a:"IP",why:"IP address: unique number identifying a device."},
+    {type:"fill",q:"Data is broken into small __________ when sent.",opts:["Packets","Wires","Servers"],a:"Packets",why:"Packets: small units of data."},
+    {type:"fill",q:"A __________ directs data between networks.",opts:["Router","Packet","Server"],a:"Router",why:"Router: directs data between networks."},
+    {type:"fill",q:"A __________ provides services or data to clients.",opts:["Server","Router","Packet"],a:"Server",why:"Server: provides services or data."},
+    {type:"fill",q:"A __________ is an agreed set of rules for communication.",opts:["Protocol","Packet","Router"],a:"Protocol",why:"Protocol: agreed rules for communication."},
+    {type:"fill",q:"The __________ is the collection of linked web pages on the Internet.",opts:["WWW","LAN","WAN"],a:"WWW",why:"WWW: collection of linked web pages."},
+    {type:"tf",q:"A network is two or more devices connected to share data.",a:true,why:"Network: connected devices sharing data."},
+    {type:"tf",q:"LAN covers a larger area than WAN.",a:false,why:"WAN covers a larger area than LAN."},
+    {type:"tf",q:"The Internet and the WWW are exactly the same.",a:false,why:"The WWW is a service on the Internet, not the Internet itself."},
+    {type:"tf",q:"An IP address uniquely identifies a device.",a:true,why:"IP address: unique number identifying a device."},
+    {type:"tf",q:"Data packets always travel the same route.",a:false,why:"Packets can travel different routes and be reassembled."},
+    {type:"tf",q:"A router directs data between networks.",a:true,why:"Router: directs traffic between networks."},
+    {type:"tf",q:"Servers request data from clients.",a:false,why:"Clients request data from servers."},
+    {type:"tf",q:"HTTPS encrypts web page communication.",a:true,why:"HTTPS encrypts traffic between browser and website."},
+    {type:"tf",q:"Wired connections are usually slower than Wi-Fi.",a:false,why:"Wired connections are usually faster and more stable."},
+    {type:"tf",q:"Encryption helps protect data in transit.",a:true,why:"Encryption scrambles data to protect it in transit."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Network","Devices connected to share data."],["LAN","Covers a small area like a home."],["WAN","Covers a large area like a country."],["Internet","Global network of connected devices."],["WWW","Collection of linked web pages."],["IP address","Unique number identifying a device."],["Packet","Small unit of data sent across networks."],["Router","Directs data between networks."],["Server","Provides services or data."],["Protocol","Agreed rules for communication."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is a network? Give one example.",a:"A network is two or more devices connected to share data. Example: a school computer network.",why:"A good answer defines and gives an example."},
+    {type:"short",q:"What is the difference between a LAN and a WAN?",a:"A LAN covers a small area such as a home; a WAN covers a large area such as a country or the world.",why:"A good answer contrasts the two network sizes."},
+    {type:"short",q:"What is the Internet?",a:"The Internet is the global network of connected computers and devices.",why:"A good answer defines the Internet."},
+    {type:"short",q:"What is the difference between the Internet and the WWW?",a:"The Internet is the network of devices; the WWW is a service (linked web pages) that runs on it.",why:"A good answer distinguishes the two."},
+    {type:"short",q:"What is an IP address?",a:"An IP address is a unique number that identifies a device on a network.",why:"A good answer defines an IP address."},
+    {type:"short",q:"Why is data broken into packets?",a:"Small packets can travel efficiently and reassemble at the destination, even taking different routes.",why:"A good answer explains the purpose of packets."},
+    {type:"short",q:"What does a router do?",a:"A router directs data packets between networks.",why:"A good answer defines a router."},
+    {type:"short",q:"What is the difference between a server and a client?",a:"A server provides services or data; a client requests them.",why:"A good answer contrasts server and client roles."},
+    {type:"short",q:"What is a protocol? Give one example.",a:"A protocol is a set of agreed communication rules. Example: HTTPS for secure web pages.",why:"A good answer defines and gives an example."},
+    {type:"short",q:"Give two ways to stay safe on networks.",a:"Use strong passwords and use encrypted connections like HTTPS when available.",why:"A good answer gives two practical safety tips."}
+  ]
+},
+{
+  id:4,title:"Online Security",
+  sub:"Passwords, phishing, digital footprints and safer online behaviour",
+  lessons:[
+    ["Why online security matters","Data such as names, addresses, passwords and photos can be valuable. Weak security can lead to scams, identity theft or upset."],
+    ["Strong passwords","A strong password is long (12+ characters), mixes upper and lowercase letters, numbers and symbols, and does not use obvious personal information."],
+    ["Password managers and 2FA","Password managers store strong unique passwords. Two-factor authentication (2FA) adds a second check like a code to your phone."],
+    ["Phishing and scams","Phishing messages pretend to be trusted organisations to steal information. Be suspicious of urgent messages, unknown links and requests for personal data."],
+    ["Malware","Malware is harmful software (viruses, worms, ransomware). Keep software updated, use antivirus tools and avoid unknown downloads."],
+    ["Digital footprint","A digital footprint is the trail of activity you leave online. Posts, searches and comments can persist for years, so think before sharing."],
+    ["Cyberbullying","Cyberbullying is repeated harmful behaviour through digital services. Save evidence, block or report the account and tell a trusted adult."],
+    ["Protecting personal information","Only share personal details when necessary and with trusted people. Check privacy settings on social media and apps."],
+    ["Safe browsing and updates","Use HTTPS where possible, avoid unknown links, and install software updates promptly — updates often fix security problems."],
+    ["Reporting and help","Report suspicious messages to the platform, and tell a trusted adult if you feel unsafe. If a crime may have occurred, contact the police."]
+  ],
+  vocab:[["Phishing","Fake messages designed to steal information."],["Malware","Harmful software such as viruses and ransomware."],["Digital footprint","The trail of activity you leave online."],["Cyberbullying","Repeated harmful behaviour online."],["2FA","Two-factor authentication adds a second check."],["Encryption","Scrambling data so only authorised people can read it."],["Antivirus","Software that detects and removes malware."],["Firewall","Filters network traffic to block threats."],["Spam","Unwanted bulk messages."],["Privacy settings","Controls for who can see your information."]],
+  questions:[
+    {type:"mcq",q:"What makes a strong password?",opts:["Long, mixed characters and not obvious","Your pet's name","1234"],a:0,why:"Strong passwords are long and mix characters without obvious info."},
+    {type:"mcq",q:"What is phishing?",opts:["Fake messages designed to steal information","A type of password","A network cable"],a:0,why:"Phishing messages pretend to be trusted to steal data."},
+    {type:"mcq",q:"What is malware?",opts:["Harmful software","A type of password","A type of cable"],a:0,why:"Malware is harmful software like viruses and ransomware."},
+    {type:"mcq",q:"What is a digital footprint?",opts:["The trail of activity you leave online","A type of shoe","A password"],a:0,why:"Digital footprint: the trail of activity left online."},
+    {type:"mcq",q:"What is cyberbullying?",opts:["Repeated harmful behaviour online","A type of password","A browser feature"],a:0,why:"Cyberbullying: repeated harmful behaviour online."},
+    {type:"mcq",q:"What does 2FA add?",opts:["A second check such as a code","A second password only","A new email"],a:0,why:"2FA adds a second check to log in."},
+    {type:"mcq",q:"What is encryption?",opts:["Scrambling data so only authorised people can read it","Sharing passwords publicly","Deleting data"],a:0,why:"Encryption scrambles data to protect it."},
+    {type:"mcq",q:"What does antivirus software do?",opts:["Detects and removes malware","Writes passwords","Adds emojis"],a:0,why:"Antivirus software detects and removes malware."},
+    {type:"mcq",q:"What does a firewall do?",opts:["Filters network traffic to block threats","Adds photos","Changes passwords"],a:0,why:"A firewall filters network traffic."},
+    {type:"mcq",q:"What is spam?",opts:["Unwanted bulk messages","A type of network","A browser"],a:0,why:"Spam is unwanted bulk messages."},
+    {type:"mcq",q:"What do privacy settings control?",opts:["Who can see your information","Your password length","Your internet speed"],a:0,why:"Privacy settings control who can see your information."},
+    {type:"mcq",q:"What should you do with unfamiliar links?",opts:["Avoid clicking them","Click them quickly","Share with friends"],a:0,why:"Avoid unfamiliar links — they may be phishing or malware."},
+    {type:"mcq",q:"Why are software updates important?",opts:["They often fix security problems","They make files bigger","They delete passwords"],a:0,why:"Updates fix bugs and security problems."},
+    {type:"mcq",q:"What should you do if you receive a suspicious message?",opts:["Report it to the platform and tell an adult","Reply with personal details","Forward it to friends"],a:0,why:"Report suspicious messages and tell an adult."},
+    {type:"mcq",q:"What should you do if you feel unsafe online?",opts:["Tell a trusted adult","Delete everything silently","Keep it a secret"],a:0,why:"Tell a trusted adult when you feel unsafe."},
+    {type:"mcq",q:"Why is reusing one password risky?",opts:["If one site is breached, many accounts are at risk","It makes logins slower","It breaks websites"],a:0,why:"Reusing passwords multiplies the risk if one site is breached."},
+    {type:"mcq",q:"Why does cyberbullying need evidence saved?",opts:["So adults can help and it can be reported","To share with friends","To make a video"],a:0,why:"Evidence helps adults and platforms respond appropriately."},
+    {type:"mcq",q:"What is a good habit for shared devices?",opts:["Sign out when you finish","Stay signed in","Save your password"],a:0,why:"Sign out on shared devices to protect your account."},
+    {type:"mcq",q:"What is a risk of sharing personal information online?",opts:["It may be misused by strangers","It makes files bigger","It removes passwords"],a:0,why:"Personal information shared online may be misused."},
+    {type:"mcq",q:"What should you do if a phishing message asks for your password?",opts:["Do not reply and report it","Reply with the password","Click the link"],a:0,why:"Never share your password; report the message."},
+    {type:"fill",q:"__________ is fake messages designed to steal information.",opts:["Phishing","Malware","Spam"],a:"Phishing",why:"Phishing: fake messages designed to steal information."},
+    {type:"fill",q:"__________ is harmful software like viruses.",opts:["Malware","Spam","2FA"],a:"Malware",why:"Malware: harmful software."},
+    {type:"fill",q:"A digital __________ is the trail you leave online.",opts:["Footprint","Password","Firewall"],a:"Footprint",why:"Digital footprint: the trail of activity left online."},
+    {type:"fill",q:"__________ is repeated harmful behaviour online.",opts:["Cyberbullying","Spam","Encryption"],a:"Cyberbullying",why:"Cyberbullying: repeated harmful behaviour online."},
+    {type:"fill",q:"__________ adds a second check when logging in.",opts:["2FA","Spam","Firewall"],a:"2FA",why:"2FA: two-factor authentication adds a second check."},
+    {type:"fill",q:"__________ scrambles data to protect it.",opts:["Encryption","Spam","Firewall"],a:"Encryption",why:"Encryption: scrambling data to protect it."},
+    {type:"fill",q:"__________ software detects and removes malware.",opts:["Antivirus","Firewall","Spam"],a:"Antivirus",why:"Antivirus software detects and removes malware."},
+    {type:"fill",q:"A __________ filters network traffic to block threats.",opts:["Firewall","Spam","Password"],a:"Firewall",why:"Firewall: filters network traffic."},
+    {type:"fill",q:"__________ is unwanted bulk email or messages.",opts:["Spam","Phishing","2FA"],a:"Spam",why:"Spam: unwanted bulk messages."},
+    {type:"fill",q:"__________ settings control who can see your information.",opts:["Privacy","Spam","Firewall"],a:"Privacy",why:"Privacy settings control who can see information."},
+    {type:"tf",q:"A strong password is long and mixes characters.",a:true,why:"Strong passwords are long and mix characters."},
+    {type:"tf",q:"Phishing messages are always genuine.",a:false,why:"Phishing messages pretend to be trusted but are not genuine."},
+    {type:"tf",q:"Malware is harmful software.",a:true,why:"Malware is harmful software."},
+    {type:"tf",q:"A digital footprint is the trail of activity you leave online.",a:true,why:"Digital footprint: the trail of activity left online."},
+    {type:"tf",q:"Cyberbullying is kind behaviour online.",a:false,why:"Cyberbullying is harmful behaviour online."},
+    {type:"tf",q:"2FA adds a second check during log in.",a:true,why:"2FA: two-factor authentication."},
+    {type:"tf",q:"Encryption makes data easier for strangers to read.",a:false,why:"Encryption protects data; only authorised people can read it."},
+    {type:"tf",q:"Antivirus software detects and removes malware.",a:true,why:"Antivirus: detects and removes malware."},
+    {type:"tf",q:"Firewalls slow down all internet connections.",a:false,why:"Firewalls filter traffic — their purpose is security, not slowing."},
+    {type:"tf",q:"Privacy settings help control who sees your information.",a:true,why:"Privacy settings control visibility of information."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Phishing","Fake messages designed to steal information."],["Malware","Harmful software like viruses."],["Digital footprint","The trail of activity left online."],["Cyberbullying","Repeated harmful behaviour online."],["2FA","Adds a second check when logging in."],["Encryption","Scrambles data to protect it."],["Antivirus","Detects and removes malware."],["Firewall","Filters network traffic to block threats."],["Spam","Unwanted bulk messages."],["Privacy settings","Controls for who can see your information."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What makes a password strong?",a:"A strong password is long (12+ characters), mixes upper and lowercase letters, numbers and symbols, and avoids obvious personal information.",why:"A good answer lists the qualities of a strong password."},
+    {type:"short",q:"What is phishing?",a:"Phishing is fake messages designed to trick people into sharing information or clicking harmful links.",why:"A good answer defines phishing."},
+    {type:"short",q:"What is malware? Give one example.",a:"Malware is harmful software. Example: a virus or ransomware.",why:"A good answer defines malware with an example."},
+    {type:"short",q:"What is a digital footprint?",a:"A digital footprint is the trail of activity you leave online through posts, searches and comments.",why:"A good answer defines the concept."},
+    {type:"short",q:"What is cyberbullying? What should you do?",a:"Cyberbullying is repeated harmful behaviour online. Save evidence, block or report, and tell a trusted adult.",why:"A good answer defines and suggests action."},
+    {type:"short",q:"What is 2FA and why is it useful?",a:"2FA is two-factor authentication — a second check like a code. It makes accounts harder to break into.",why:"A good answer explains two-factor authentication."},
+    {type:"short",q:"Why is reusing one password risky?",a:"If one site is breached, an attacker could use the same password to access other accounts.",why:"A good answer explains the risk of reuse."},
+    {type:"short",q:"What should you do if you receive a suspicious message?",a:"Do not reply or click links. Report the message to the platform and tell a trusted adult.",why:"A good answer gives safe actions."},
+    {type:"short",q:"Why are software updates important?",a:"Updates fix bugs and security problems that attackers could exploit.",why:"A good answer explains security benefits of updates."},
+    {type:"short",q:"Give two ways to keep your information private online.",a:"Use strong passwords with 2FA and check privacy settings on apps and social media.",why:"A good answer gives two practical tips."}
+  ]
+},
+{
+  id:5,title:"Programming, Part Two",
+  sub:"Variables, conditionals, events and building a simple game",
+  lessons:[
+    ["Selection and conditionals","A conditional action happens only when a condition is true. IF and IF-ELSE blocks choose between two paths."],
+    ["Variables in programs","A variable is a named place to store a value that can change. Use variables for score, lives or counters."],
+    ["Operators and comparisons","Comparison operators (<, >, =) and logical operators (AND, OR, NOT) are used inside conditions to control behaviour."],
+    ["Inputs and events","Events respond to user actions: key presses, clicks, broadcasts. Inputs such as keyboard and mouse control the game."],
+    ["Collision detection","Collision detection checks whether two sprites touch. It can trigger scoring, sounds or the end of the game."],
+    ["Conditional loops","A loop can stop when a condition changes. Use while/until blocks so the game ends correctly."],
+    ["Functions and custom blocks","A function (or custom block in Scratch) groups instructions under one name. It reduces repetition and makes programs easier to update."],
+    ["Planning a game","Sketch the game screen, plan the goal, list sprites and variables, define controls, and decide win/lose conditions."],
+    ["Testing and debugging","Playtest one feature at a time. Find and fix bugs, then re-test to make sure the fix did not break other parts."],
+    ["Improving and extending","Add polish like sound, countdown timers and levels. Rebalance difficulty so the game is fun and fair."]
+  ],
+  vocab:[["Selection","Choosing which instructions to run."],["Conditional","An action that runs only if a condition is true."],["If-else","Chooses between two paths."],["Variable","A named place to store a value."],["Operator","A symbol or word used in a test or calculation."],["Collision detection","Checking whether two sprites touch."],["Function","A named group of instructions."],["Event","A trigger that starts a script."],["Playtest","Trying a game to evaluate it."],["Debug","Find and fix problems in a program."]],
+  questions:[
+    {type:"mcq",q:"What is selection?",opts:["Choosing which instructions to run","Repeating instructions","Storing data"],a:0,why:"Selection: choosing which instructions to run."},
+    {type:"mcq",q:"What is a conditional?",opts:["An action that runs only if a condition is true","A type of variable","A screen"],a:0,why:"Conditional: an action that runs only if a condition is true."},
+    {type:"mcq",q:"What does an if-else block do?",opts:["Chooses between two paths","Repeats forever","Stops the program"],a:0,why:"If-else chooses between two instruction paths."},
+    {type:"mcq",q:"What is a variable?",opts:["A named place to store a value","A type of sprite","A screen"],a:0,why:"Variable: a named place to store a value."},
+    {type:"mcq",q:"What is an operator?",opts:["A symbol or word used in a test or calculation","A type of variable","A web page"],a:0,why:"Operators appear in conditions and calculations."},
+    {type:"mcq",q:"What is collision detection?",opts:["Checking whether two sprites touch","A type of loop","Adding sound"],a:0,why:"Collision detection checks whether sprites touch."},
+    {type:"mcq",q:"What is a function or custom block?",opts:["A named group of instructions","A type of screen","A password"],a:0,why:"A function groups instructions under one name."},
+    {type:"mcq",q:"Which event can start a script?",opts:["Pressing a key","Opening a new tab","Closing the app"],a:0,why:"Key presses and clicks are common events."},
+    {type:"mcq",q:"Why use variables in games?",opts:["To store a score or lives","To change colours","To add music"],a:0,why:"Variables store values like score or lives."},
+    {type:"mcq",q:"What does playtesting mean?",opts:["Trying a game to evaluate it","Deleting the game","Renaming files"],a:0,why:"Playtesting helps evaluate how well a game works."},
+    {type:"mcq",q:"What is debugging?",opts:["Finding and fixing mistakes","Adding sprites","Adding sound"],a:0,why:"Debugging: finding and fixing mistakes."},
+    {type:"mcq",q:"What does a conditional loop do?",opts:["Repeats until a condition changes","Runs once","Adds music"],a:0,why:"Conditional loops repeat based on a condition."},
+    {type:"mcq",q:"What is a comparison operator?",opts:["A symbol like <, > or =","A type of screen","A type of sprite"],a:0,why:"Comparison operators test relationships between values."},
+    {type:"mcq",q:"Why plan a game before coding?",opts:["To organise features and rules","To save storage","To add colours"],a:0,why:"Planning helps organise features and rules before coding."},
+    {type:"mcq",q:"What should you do after fixing a bug?",opts:["Re-test the whole game","Delete the project","Add more sprites"],a:0,why:"Re-test after every change to check nothing broke."},
+    {type:"mcq",q:"What does a score variable usually do?",opts:["Counts points","Controls colour","Changes background"],a:0,why:"A score variable counts points in a game."},
+    {type:"mcq",q:"What is a broadcast in Scratch?",opts:["An event that starts other scripts","A password","A type of block"],a:0,why:"A broadcast is an event that triggers other scripts."},
+    {type:"mcq",q:"Why should a game have clear win/lose rules?",opts:["So players understand the goal","To increase file size","To add colours"],a:0,why:"Clear rules help players understand the goal."},
+    {type:"mcq",q:"How does a key press control a game?",opts:["It is an event that triggers action","It changes the score","It deletes the game"],a:0,why:"Key presses are events that trigger script actions."},
+    {type:"mcq",q:"What should a good game balance be?",opts:["Fun and fair for players","Impossibly hard","Too easy"],a:0,why:"Good balance keeps a game fun and fair."},
+    {type:"fill",q:"__________ chooses which instructions to run.",opts:["Selection","Variable","Sprite"],a:"Selection",why:"Selection: choosing which instructions to run."},
+    {type:"fill",q:"A __________ action runs only if a condition is true.",opts:["Conditional","Sprite","Score"],a:"Conditional",why:"Conditional: an action that runs only if a condition is true."},
+    {type:"fill",q:"An __________ block chooses between two paths.",opts:["If-else","If","Loop"],a:"If-else",why:"If-else chooses between two paths."},
+    {type:"fill",q:"A __________ is a named place to store a value.",opts:["Variable","Sprite","Condition"],a:"Variable",why:"Variable: a named place to store a value."},
+    {type:"fill",q:"An __________ is a symbol or word used in a test or calculation.",opts:["Operator","Event","Loop"],a:"Operator",why:"Operator: symbol or word used in a test or calculation."},
+    {type:"fill",q:"__________ detection checks whether two sprites touch.",opts:["Collision","If-else","Debug"],a:"Collision",why:"Collision detection: checks whether two sprites touch."},
+    {type:"fill",q:"A __________ is a named group of instructions.",opts:["Function","Sprite","Variable"],a:"Function",why:"Function: a named group of instructions."},
+    {type:"fill",q:"An __________ is a trigger that starts a script.",opts:["Event","Operator","Function"],a:"Event",why:"Event: a trigger that starts a script."},
+    {type:"fill",q:"__________ means trying a game to evaluate it.",opts:["Playtesting","Debugging","Coding"],a:"Playtesting",why:"Playtesting: trying a game to evaluate it."},
+    {type:"fill",q:"__________ means finding and fixing mistakes.",opts:["Debugging","Playtesting","Coding"],a:"Debugging",why:"Debugging: finding and fixing mistakes."},
+    {type:"tf",q:"Selection chooses between instructions.",a:true,why:"Selection: choosing which instructions to run."},
+    {type:"tf",q:"A conditional runs regardless of any condition.",a:false,why:"Conditionals only run when their condition is true."},
+    {type:"tf",q:"An if-else block chooses between two paths.",a:true,why:"If-else chooses between two paths."},
+    {type:"tf",q:"Variables can change while a program runs.",a:true,why:"Variables can change while a program runs."},
+    {type:"tf",q:"Comparison operators include <, > and =.",a:true,why:"Comparison operators test relationships between values."},
+    {type:"tf",q:"Collision detection checks whether two sprites touch.",a:true,why:"Collision detection checks whether sprites touch."},
+    {type:"tf",q:"Functions make programs longer and harder to read.",a:false,why:"Functions reduce repetition and make programs easier to update."},
+    {type:"tf",q:"Events can be triggered by key presses.",a:true,why:"Key presses are common events."},
+    {type:"tf",q:"Playtesting is not necessary before sharing a game.",a:false,why:"Playtesting helps find and fix problems before sharing."},
+    {type:"tf",q:"Good games balance fun and fairness.",a:true,why:"Balance makes a game fun and fair."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Selection","Choosing which instructions to run."],["Conditional","An action that runs only if a condition is true."],["If-else","Chooses between two paths."],["Variable","A named place to store a value."],["Operator","A symbol or word used in a test or calculation."],["Collision detection","Checking whether two sprites touch."],["Function","A named group of instructions."],["Event","A trigger that starts a script."],["Playtest","Trying a game to evaluate it."],["Debug","Find and fix problems in a program."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is selection? Give one example.",a:"Selection is choosing which instructions to run. Example: if the score reaches 10, show a win message.",why:"A good answer defines selection with an example."},
+    {type:"short",q:"What is a conditional statement?",a:"A conditional statement runs instructions only when a condition is true.",why:"A good answer defines a conditional."},
+    {type:"short",q:"What does if-else do?",a:"If-else chooses between two instruction paths depending on whether a condition is true or false.",why:"A good answer explains if-else behaviour."},
+    {type:"short",q:"What is a variable? Give an example.",a:"A variable is a named place to store a value. Example: a score variable in a game.",why:"A good answer defines a variable with an example."},
+    {type:"short",q:"What is a comparison operator?",a:"A comparison operator compares values (like <, > or =) inside a condition.",why:"A good answer defines comparison operators."},
+    {type:"short",q:"What is collision detection and how is it used?",a:"Collision detection checks whether two sprites touch. It can trigger scoring, sounds or the end of a game.",why:"A good answer explains collision detection."},
+    {type:"short",q:"What is a function? Why use one?",a:"A function is a named group of instructions. It saves repetition and makes programs easier to update.",why:"A good answer explains functions and benefits."},
+    {type:"short",q:"What is an event? Give one game example.",a:"An event is a trigger that starts a script. Example: pressing a key to move the sprite.",why:"A good answer defines events with an example."},
+    {type:"short",q:"What is playtesting and why is it useful?",a:"Playtesting means trying a game to see how well it works and to find improvements.",why:"A good answer defines playtesting."},
+    {type:"short",q:"Give two things to plan before coding a game.",a:"Sketch the game screen and list sprites, variables and controls.",why:"A good answer lists two planning steps."}
+  ]
+},
+{
+  id:6,title:"Spreadsheets",
+  sub:"Organising data, using formulas and creating charts",
+  lessons:[
+    ["What is a spreadsheet?","A spreadsheet is a grid of rows and columns used to store and calculate data. Each box is a cell identified by its column letter and row number, like B3."],
+    ["Entering data","You can type text, numbers and dates into cells. Keep headings clear and consistent so data is easy to read and analyse."],
+    ["Formulas","A formula starts with = and calculates a value. Example: =A1+B1 adds two cells. Formulas update automatically if cell values change."],
+    ["Functions","Built-in functions like SUM, AVERAGE, MIN, MAX and COUNT make calculations quicker. They take a range of cells, like =SUM(B2:B10)."],
+    ["Cell references","Relative references change when copied (like A1). Absolute references (like $A$1) stay fixed when the formula is copied."],
+    ["Sorting and filtering","Sorting arranges rows by a column (alphabetical or numerical). Filtering hides rows that do not match a rule."],
+    ["Charts","Charts turn data into pictures. Bar charts compare categories, line charts show change over time, pie charts show parts of a whole."],
+    ["Formatting data","Format cells for currency, percentages and decimals. Use colours and borders to highlight important information."],
+    ["Data validation","Data validation restricts what can be entered in a cell (like a number between 1 and 10), reducing errors."],
+    ["Analysing results","Use charts and summary functions to spot trends. Always double-check data and formulas to avoid mistakes."]
+  ],
+  vocab:[["Spreadsheet","A grid of rows and columns for data."],["Cell","A single box identified by column and row."],["Row","Horizontal group of cells."],["Column","Vertical group of cells."],["Formula","A calculation starting with =."],["Function","A built-in calculation like SUM."],["Range","A block of cells like B2:B10."],["Chart","A visual representation of data."],["Absolute reference","A cell reference that stays fixed when copied."],["Data validation","A rule limiting what can be entered."]],
+  questions:[
+    {type:"mcq",q:"What is a spreadsheet?",opts:["A grid of rows and columns for data","A type of image","A web browser"],a:0,why:"Spreadsheet: a grid for storing and calculating data."},
+    {type:"mcq",q:"What is a cell?",opts:["A single box identified by column and row","A whole spreadsheet","A chart"],a:0,why:"Cell: a single box in a spreadsheet."},
+    {type:"mcq",q:"What is a row?",opts:["Horizontal group of cells","Vertical group of cells","A single cell"],a:0,why:"Row: horizontal cells."},
+    {type:"mcq",q:"What is a column?",opts:["Vertical group of cells","Horizontal group of cells","A cell"],a:0,why:"Column: vertical cells."},
+    {type:"mcq",q:"What does every formula begin with?",opts:["An equals sign (=)","A letter A","A quote mark"],a:0,why:"Formulas start with = so the app calculates them."},
+    {type:"mcq",q:"Which function adds a range of numbers?",opts:["SUM","AVERAGE","COUNT"],a:0,why:"SUM adds numbers in a range."},
+    {type:"mcq",q:"Which function finds the average?",opts:["AVERAGE","SUM","MIN"],a:0,why:"AVERAGE calculates the mean of a range."},
+    {type:"mcq",q:"What is a range?",opts:["A block of cells like B2:B10","A single cell","A chart"],a:0,why:"Range: a block of cells."},
+    {type:"mcq",q:"What does an absolute reference look like?",opts:["$A$1","A1","1A"],a:0,why:"Absolute references use $ signs to stay fixed when copied."},
+    {type:"mcq",q:"What is a chart?",opts:["A visual representation of data","A single cell","A formula"],a:0,why:"Chart: visual representation of data."},
+    {type:"mcq",q:"Which chart shows change over time?",opts:["Line chart","Pie chart","Bar chart"],a:0,why:"Line charts show change over time."},
+    {type:"mcq",q:"Which chart shows parts of a whole?",opts:["Pie chart","Line chart","Bar chart"],a:0,why:"Pie charts show parts of a whole."},
+    {type:"mcq",q:"Which chart compares categories?",opts:["Bar chart","Pie chart","Line chart"],a:0,why:"Bar charts compare categories."},
+    {type:"mcq",q:"What does data validation do?",opts:["Limits what can be entered in a cell","Deletes rows","Creates charts"],a:0,why:"Data validation limits what can be entered."},
+    {type:"mcq",q:"What is sorting data?",opts:["Arranging rows by a column","Colouring cells","Deleting cells"],a:0,why:"Sorting arranges rows by a column."},
+    {type:"mcq",q:"What is filtering data?",opts:["Hiding rows that don't match a rule","Changing fonts","Creating charts"],a:0,why:"Filtering hides rows that don't match."},
+    {type:"mcq",q:"Which cell reference changes when copied?",opts:["Relative (like A1)","Absolute (like $A$1)","Neither"],a:0,why:"Relative references change when copied; absolute ones don't."},
+    {type:"mcq",q:"Why check formulas before sharing a spreadsheet?",opts:["To avoid mistakes in results","To make files bigger","To add colours"],a:0,why:"Checking formulas avoids mistakes in results."},
+    {type:"mcq",q:"How would you write a formula to add A1 and B1?",opts:["=A1+B1","A1+B1","Sum A1 B1"],a:0,why:"Formulas start with =, e.g. =A1+B1."},
+    {type:"mcq",q:"Why format cells as percentages?",opts:["To display numbers clearly","To make files larger","To change formulas"],a:0,why:"Formatting shows numbers clearly (e.g. 50%)."},
+    {type:"fill",q:"A __________ is a grid of rows and columns for data.",opts:["Spreadsheet","Chart","Cell"],a:"Spreadsheet",why:"Spreadsheet: a grid for data."},
+    {type:"fill",q:"A __________ is a single box identified by column and row.",opts:["Cell","Chart","Range"],a:"Cell",why:"Cell: a single box in a spreadsheet."},
+    {type:"fill",q:"A __________ is a horizontal group of cells.",opts:["Row","Column","Range"],a:"Row",why:"Row: horizontal cells."},
+    {type:"fill",q:"A __________ is a vertical group of cells.",opts:["Column","Row","Cell"],a:"Column",why:"Column: vertical cells."},
+    {type:"fill",q:"A __________ is a calculation starting with =.",opts:["Formula","Chart","Range"],a:"Formula",why:"Formula: a calculation starting with =."},
+    {type:"fill",q:"__________ is a built-in calculation like SUM.",opts:["Function","Formula","Range"],a:"Function",why:"Function: a built-in calculation like SUM."},
+    {type:"fill",q:"A __________ is a block of cells like B2:B10.",opts:["Range","Chart","Cell"],a:"Range",why:"Range: a block of cells."},
+    {type:"fill",q:"A __________ is a visual representation of data.",opts:["Chart","Formula","Range"],a:"Chart",why:"Chart: a visual representation of data."},
+    {type:"fill",q:"An __________ reference stays fixed when copied.",opts:["Absolute","Relative","Chart"],a:"Absolute",why:"Absolute references use $ to stay fixed."},
+    {type:"fill",q:"__________ validation limits what can be entered in a cell.",opts:["Data","Chart","Formula"],a:"Data",why:"Data validation limits what can be entered."},
+    {type:"tf",q:"A spreadsheet is a grid of rows and columns.",a:true,why:"Spreadsheet: a grid for data."},
+    {type:"tf",q:"A cell is the whole spreadsheet.",a:false,why:"Cell: a single box in a spreadsheet."},
+    {type:"tf",q:"Formulas begin with an equals sign.",a:true,why:"Formulas start with = so the app calculates them."},
+    {type:"tf",q:"SUM adds numbers in a range.",a:true,why:"SUM adds numbers."},
+    {type:"tf",q:"AVERAGE finds the largest number.",a:false,why:"AVERAGE finds the mean; MAX finds the largest."},
+    {type:"tf",q:"Absolute references change when copied.",a:false,why:"Absolute references stay fixed when copied."},
+    {type:"tf",q:"Pie charts show parts of a whole.",a:true,why:"Pie charts show parts of a whole."},
+    {type:"tf",q:"Data validation reduces errors in spreadsheets.",a:true,why:"Data validation limits what can be entered."},
+    {type:"tf",q:"Filtering arranges rows alphabetically.",a:false,why:"Filtering hides rows; sorting arranges them."},
+    {type:"tf",q:"You should check formulas before sharing a spreadsheet.",a:true,why:"Checking formulas avoids mistakes."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Spreadsheet","A grid of rows and columns for data."],["Cell","A single box identified by column and row."],["Row","Horizontal group of cells."],["Column","Vertical group of cells."],["Formula","A calculation starting with =."],["Function","A built-in calculation like SUM."],["Range","A block of cells like B2:B10."],["Chart","A visual representation of data."],["Absolute reference","A cell reference that stays fixed when copied."],["Data validation","A rule limiting what can be entered."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is a spreadsheet?",a:"A spreadsheet is a grid of rows and columns used to store, organise and calculate data.",why:"A good answer defines a spreadsheet."},
+    {type:"short",q:"What is a cell? Give one example of a cell address.",a:"A cell is a single box in a spreadsheet, identified by column and row (e.g. B3).",why:"A good answer defines a cell with an example."},
+    {type:"short",q:"How do you start a formula?",a:"Formulas begin with an equals sign (=) followed by cell references or values.",why:"A good answer explains the formula syntax."},
+    {type:"short",q:"What is a function? Give one example.",a:"A function is a built-in calculation like SUM or AVERAGE applied to a range of cells.",why:"A good answer defines functions with an example."},
+    {type:"short",q:"What is the difference between a relative and absolute reference?",a:"A relative reference (like A1) changes when copied; an absolute reference (like $A$1) stays fixed.",why:"A good answer contrasts the two references."},
+    {type:"short",q:"Why are charts useful?",a:"Charts turn data into pictures, making patterns, comparisons and trends easier to understand.",why:"A good answer explains chart benefits."},
+    {type:"short",q:"Give an example of a chart and what it shows.",a:"A pie chart shows parts of a whole, e.g. how a class spends its budget.",why:"A good answer names a chart and its use."},
+    {type:"short",q:"What is data validation?",a:"Data validation is a rule that limits what can be entered in a cell, reducing mistakes.",why:"A good answer defines data validation."},
+    {type:"short",q:"What is the difference between sorting and filtering?",a:"Sorting arranges rows by a column; filtering hides rows that do not match a rule.",why:"A good answer contrasts sorting and filtering."},
+    {type:"short",q:"Why should you check a spreadsheet before sharing it?",a:"Checking ensures formulas and data are correct so results are accurate.",why:"A good answer explains the purpose of checking."}
+  ]
+}
+];
+
+let units = embeddedUnits, active = 1, view = 'home', filter = 'all', exam = null, timer = null;
+let progress = JSON.parse(localStorage.getItem('jsProgress_Y5') || '{}');
+const $ = s => document.querySelector(s);
+
+applyLoginState();
+render();
+
+function go(v) {
+  if (!studentName) { loginOverlay.classList.remove('hidden'); return; }
+  view = v;
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  $('#hero').classList.toggle('hidden', v !== 'home');
+  $('.stats').classList.toggle('hidden', v !== 'home');
+  render();
+  scrollTo({top:0,behavior:'smooth'});
+  $('nav').classList.remove('open');
+}
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => go(b.dataset.view));
+$('#menu').onclick = () => $('nav').classList.toggle('open');
+
+function tabs() {
+  return '<div class="tabs">' + units.map(u =>
+    `<button class="${u.id===active?'active':''}" onclick="active=${u.id};render()">${u.id}. ${u.title}</button>`
+  ).join('') + '</div>';
+}
+
+function render() {
+  if (!units.length || !studentName) return;
+  const u = units[active-1], v = $('#view');
+
+  if (view === 'home') {
+    v.innerHTML = `
+      <div class="head">
+        <label>YOUR LEARNING PATH</label>
+        <h2>Welcome back, ${escapeHtml(studentName)} 👋</h2>
+        <p class="muted">Choose a unit to study, practise, or take a timed assessment.</p>
+      </div>
+      <div class="grid">${units.map(x => `
+        <article class="card">
+          <div class="num">UNIT ${x.id}</div>
+          <h3>${x.title}</h3>
+          <p>${x.sub}</p>
+          <div>
+            <button onclick="active=${x.id};go('study')">Study notes ↗</button>
+            <button onclick="active=${x.id};go('exam')">Take exam →</button>
+          </div>
+        </article>`).join('')}
+      </div>
+      <div class="panel">
+        <label>EXAM STRUCTURE</label>
+        <h2>80 marks • 60 minutes</h2>
+        <p class="muted">20 multiple choice (20 marks) + 10 fill blanks (10) + 10 true/false (10) + 1 matching task worth 10 marks (10 pairs) + 10 short answers (30 marks; 3 each).</p>
+      </div>`;
+  }
+  else if (view === 'study') {
+    v.innerHTML = `
+      <div class="head">
+        <label>STUDY LIBRARY</label>
+        <h2>Study Notes</h2>
+        <p>Child-friendly explanations and key vocabulary.</p>
+      </div>
+      ${tabs()}
+      <div class="panel">
+        <label>UNIT ${u.id}</label>
+        <h2>${u.title}</h2>
+        <p class="muted">${u.sub}</p>
+        ${u.lessons.map((l,i) => `
+          <article class="lesson">
+            <label>LESSON ${i+1}</label>
+            <h3>${l[0]}</h3>
+            <p>${l[1]}</p>
+          </article>`).join('')}
+      </div>
+      <div class="panel">
+        <label>KEY VOCABULARY</label>
+        <div class="vocab">${u.vocab.map(x => `<div class="word"><b>${x[0]}</b>${x[1]}</div>`).join('')}</div>
+      </div>
+      <div class="callout">Study tip: explain each key idea in your own words, then practise without looking at the notes.</div>
+      <button class="gold" onclick="go('practice')">Practise this unit →</button>
+      <button onclick="go('exam')">Start exam</button>`;
+  }
+  else if (view === 'practice') {
+    const qs = u.questions.filter(q => filter === 'all' || q.type === filter);
+    v.innerHTML = `
+      <div class="head">
+        <label>PRACTICE STUDIO</label>
+        <h2>Workbook-style Practice</h2>
+        <p>Original questions aligned with unit themes. Check answers to see explanations.</p>
+      </div>
+      ${tabs()}
+      <div class="tabs">
+        ${[['all','All types'],['mcq','Multiple choice'],['fill','Fill blanks'],['tf','True / false'],['match','Matching'],['short','Short answer']].map(a =>
+          `<button class="${filter===a[0]?'active':''}" onclick="filter='${a[0]}';render()">${a[1]}</button>`
+        ).join('')}
+      </div>
+      <div class="callout">These are newly written practice questions, not a verbatim reproduction of Pearson workbook pages.</div>
+      <form id="pf">
+        ${qs.map((q,i) => qhtml(q,i,'p')).join('')}
+        <button class="gold">Check answers</button>
+      </form>
+      <div id="pr"></div>`;
+    $('#pf').onsubmit = e => {
+      e.preventDefault();
+      let c = 0;
+      qs.forEach((q,i) => {
+        const a = getanswer(q,i,'p'), ok = check(q,a);
+        if(ok) c++;
+        const el = $('#fbp'+i);
+        el.className = 'feedback ' + (ok?'good':'bad');
+        el.innerHTML = `<b>${ok?'Correct':'Review this answer'}.</b> ${answertext(q)} ${q.why}`;
+      });
+      $('#pr').innerHTML = `<div class="panel"><h2>${c}/${qs.length} correct</h2><div class="bar"><span style="width:${Math.round(c/qs.length*100)}%"></span></div><p class="muted">Review the feedback and try again.</p></div>`;
+    };
+  }
+  else if (view === 'exam') {
+    if (exam && !exam.done && exam.uid === active) { renderExam(); return; }
+    v.innerHTML = `
+      <div class="head">
+        <label>TIMED ASSESSMENT</label>
+        <h2>Unit Examination</h2>
+        <p>60-minute assessment with instant feedback.</p>
+      </div>
+      ${tabs()}
+      <div class="panel">
+        <h2>${u.title}</h2>
+        <div class="three">
+          <div><b>51</b><span>Tasks / 60 question parts</span></div>
+          <div><b>80</b><span>Total marks</span></div>
+          <div><b>60 min</b><span>Time allowed</span></div>
+        </div>
+        <p class="muted">20 MCQ + 10 fill blanks + 10 true/false + one matching task worth 10 marks + 10 short answers = 60 question parts and 80 marks. Matching gives 10 marks when all ten pairs are correct.</p>
+        <button class="gold" onclick="startExam()">Begin exam →</button>
+      </div>`;
+  }
+  else if (view === 'progress') {
+    const done = units.filter(x => progress[x.id]);
+    v.innerHTML = `
+      <div class="head">
+        <label>LEARNING DASHBOARD</label>
+        <h2>${escapeHtml(studentName)}'s Progress</h2>
+        <p>Scores are saved only in this browser.</p>
+      </div>
+      <div class="three">
+        <div><b>${done.length}/6</b><span>Units attempted</span></div>
+        <div><b>${done.length?Math.round(done.reduce((s,x)=>s+progress[x.id].pct,0)/done.length):0}%</b><span>Average score</span></div>
+        <div><b>${done.filter(x=>progress[x.id].pct>=80).length}</b><span>Units at 80%+</span></div>
+      </div>
+      <div class="grid">${units.map(x => `
+        <article class="card">
+          <h3>${x.title}</h3>
+          <p>${progress[x.id]?`Last score: ${progress[x.id].pct}% (${progress[x.id].marks}/80)`:'Not attempted yet.'}</p>
+          <button onclick="active=${x.id};go('exam')">${progress[x.id]?'Retake':'Start'} exam →</button>
+        </article>`).join('')}
+      </div>
+      <button onclick="if(confirm('Clear saved scores?')){progress={};localStorage.removeItem('jsProgress_Y5');render()}">Reset saved progress</button>
+      <p class="muted">This front-end demo does not send scores to a teacher or server.</p>`;
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function qhtml(q,i,p) {
+  let h = '';
+  if (q.type === 'mcq') {
+    h = '<div class="options">' + q.opts.map((o,j) =>
+      `<label class="opt"><input type="radio" name="${p}${i}" value="${j}"> <span>${String.fromCharCode(65+j)}. ${o}</span></label>`
+    ).join('') + '</div>';
+  }
+  if (q.type === 'fill') {
+    h = `<p class="muted">Word bank: ${q.opts.join(' · ')}</p><input type="text" name="${p}${i}" placeholder="Type your answer">`;
+  }
+  if (q.type === 'tf') {
+    h = `<div class="options">
+      <label class="opt"><input type="radio" name="${p}${i}" value="true"> <span>True</span></label>
+      <label class="opt"><input type="radio" name="${p}${i}" value="false"> <span>False</span></label>
+    </div>`;
+  }
+  if (q.type === 'match') {
+    h = '<div class="pairs">' + q.pairs.map((x,j) =>
+      `<div class="word"><b>${j+1}. ${x[0]}</b>
+        <select name="${p}${i}_${j}">
+          <option value="">Choose definition…</option>
+          ${q.pairs.map((y,k) => `<option value="${k}">${y[1]}</option>`).join('')}
+        </select>
+      </div>`
+    ).join('') + '</div>';
+  }
+  if (q.type === 'short') {
+    h = `<textarea name="${p}${i}" rows="4" placeholder="Answer in your own words"></textarea>`;
+  }
+  const marks = q.type === 'short' ? '3 marks' : q.type === 'match' ? '10 marks' : '1 mark';
+  return `<article class="q">
+    <div class="qtop">QUESTION ${i+1} · ${q.type.toUpperCase()} · ${marks}</div>
+    <h3>${q.q}</h3>
+    ${h}
+    <div id="fb${p}${i}"></div>
+  </article>`;
+}
+
+function getanswer(q,i,p) {
+  if (q.type === 'match') return q.pairs.map((_,j) => $(`[name="${p}${i}_${j}"]`).value);
+  if (q.type === 'short' || q.type === 'fill') return $(`[name="${p}${i}"]`)?.value || '';
+  return $(`[name="${p}${i}"]:checked`)?.value;
+}
+
+function norm(s) {
+  return String(s ?? '').toLowerCase().trim().replace(/[.,!?;:'“”]/g,'').replace(/\s+/g,' ');
+}
+
+function check(q,a) {
+  if (q.type === 'mcq') return a !== undefined && Number(a) === q.a;
+  if (q.type === 'tf') return a !== undefined && (a === 'true') === q.a;
+  if (q.type === 'fill') return norm(a) === norm(q.a);
+  if (q.type === 'match') return Array.isArray(a) && a.every((x,i) => x !== '' && Number(x) === i);
+  const words = norm(q.a).split(' ').filter(w => w.length > 4);
+  return norm(a).length > 20 && words.filter(w => norm(a).includes(w)).length >= 1;
+}
+
+function answertext(q) {
+  if (q.type === 'mcq') return `Correct answer: ${q.opts[q.a]}.`;
+  if (q.type === 'tf') return `Correct answer: ${q.a?'True':'False'}.`;
+  if (q.type === 'fill') return `Suggested answer: ${q.a}.`;
+  if (q.type === 'match') return 'All ten pairs must be correct for full marks.';
+  return `Model answer: ${q.a}`;
+}
+
+function correctAnswerText(q) {
+  if (q.type === 'mcq') return `${String.fromCharCode(65 + q.a)}. ${q.opts[q.a]}`;
+  if (q.type === 'tf') return q.a ? 'True' : 'False';
+  if (q.type === 'fill') return q.a;
+  if (q.type === 'match') return q.pairs.map((p, j) => `${j+1}. ${p[0]} → ${p[1]}`).join('<br>');
+  if (q.type === 'short') return q.a;
+  return '';
+}
+
+function studentAnswerText(q, a) {
+  if (q.type === 'mcq') {
+    if (a === undefined || a === '' || a === null) return '<em>(No answer)</em>';
+    const idx = Number(a);
+    return `${String.fromCharCode(65 + idx)}. ${q.opts[idx]}`;
+  }
+  if (q.type === 'tf') {
+    if (a === undefined || a === '') return '<em>(No answer)</em>';
+    return a === 'true' ? 'True' : 'False';
+  }
+  if (q.type === 'fill') return (a || '').trim() ? escapeHtml(a) : '<em>(No answer)</em>';
+  if (q.type === 'match') {
+    if (!Array.isArray(a)) return '<em>(No answer)</em>';
+    return q.pairs.map((p, j) => {
+      const sel = a[j];
+      const def = (sel !== '' && sel !== undefined && sel !== null) ? q.pairs[Number(sel)]?.[1] : '<em>(not selected)</em>';
+      const correctDef = q.pairs[j][1];
+      const ok = sel !== '' && Number(sel) === j;
+      return `<span style="color:${ok ? 'var(--good)' : 'var(--bad)'}">${j+1}. ${p[0]} → ${def}${!ok ? ` <span style="color:#a03c34;font-size:13px">(should be: ${correctDef})</span>` : ''}</span>`;
+    }).join('<br>');
+  }
+  if (q.type === 'short') return (a || '').trim() ? escapeHtml(a) : '<em>(No answer)</em>';
+  return '<em>(No answer)</em>';
+}
+
+function startExam() {
+  exam = {uid:active, qs:units[active-1].questions, idx:0, answers:{}, left:3600, done:false};
+  if (timer) clearInterval(timer);
+  timer = setInterval(() => {
+    if (!exam || exam.done) return;
+    exam.left--;
+    const t = $('#timer');
+    if (t) t.textContent = fmt(exam.left);
+    if (exam.left <= 0) finishExam(true);
+  }, 1000);
+  renderExam();
+}
+
+function fmt(n) {
+  return `${String(Math.floor(Math.max(0,n)/60)).padStart(2,'0')}:${String(Math.max(0,n)%60).padStart(2,'0')}`;
+}
+
+function save() {
+  const e = exam, q = e.qs[e.idx];
+  e.answers[e.idx] = getanswer(q, e.idx, 'e');
+}
+
+function renderExam() {
+  const e = exam, q = e.qs[e.idx];
+  $('#view').innerHTML = `
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap">
+        <div>
+          <label>UNIT ${e.uid} EXAM · ${escapeHtml(studentName)}</label>
+          <h2>${units[e.uid-1].title}</h2>
+          <p class="muted">Task ${e.idx+1} of ${e.qs.length}</p>
+        </div>
+        <div class="timer" id="timer">${fmt(e.left)}</div>
+      </div>
+      <div class="bar"><span style="width:${(e.idx+1)/e.qs.length*100}%"></span></div>
+      <form id="ef">${qhtml(q, e.idx, 'e')}</form>
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+        <button ${e.idx===0?'disabled':''} onclick="save();exam.idx--;renderExam()">← Previous</button>
+        <span class="muted">${Object.keys(e.answers).length} answered</span>
+        ${e.idx < e.qs.length-1
+          ? '<button class="gold" onclick="save();exam.idx++;renderExam()">Next →</button>'
+          : '<button class="gold" onclick="save();if(confirm(\'Submit exam?\'))finishExam(false)">Submit exam</button>'}
+      </div>
+      <p class="muted" style="margin-top:14px">Keep this page open until you submit.</p>
+    </div>`;
+  const a = e.answers[e.idx];
+  if (a !== undefined) {
+    if (q.type === 'match') a.forEach((x,j) => { const el = $(`[name="e${e.idx}_${j}"]`); if(el) el.value = x; });
+    else if (q.type === 'fill' || q.type === 'short') { const el = $(`[name="e${e.idx}"]`); if(el) el.value = a; }
+    else {
+      const el = $(`[name="e${e.idx}"][value="${a}"]`);
+      if (el) el.checked = true;
+    }
+  }
+}
+
+function finishExam(auto) {
+  if (!exam || exam.done) return;
+  if (timer) clearInterval(timer);
+  exam.done = true;
+  const e = exam;
+  let marks = 0, rows = [];
+  e.qs.forEach((q,i) => {
+    const a = e.answers[i];
+    let m = 0, ok = false, max = 1;
+    if (q.type === 'mcq' || q.type === 'fill' || q.type === 'tf') { ok = check(q,a); m = ok?1:0; max = 1; }
+    else if (q.type === 'match') { ok = check(q,a||[]); m = ok?10:0; max = 10; }
+    else { ok = check(q,a); m = ok?3:0; max = 3; }
+    marks += m;
+    rows.push({q, a, m, ok, max});
+  });
+  const pct = Math.round(marks/80*100);
+  progress[e.uid] = {marks,pct};
+  localStorage.setItem('jsProgress_Y5', JSON.stringify(progress));
+  $('#view').innerHTML = `
+    <div class="panel">
+      <label>EXAM COMPLETE ${auto?'• TIME EXPIRED':''}</label>
+      <h2>${escapeHtml(studentName)}'s Results</h2>
+      <div class="result">${marks} <span style="font-size:24px;color:#777">/ 80</span></div>
+      <p class="muted">${pct}% provisional score. Short-answer marking is a simple automated estimate; compare your response with the model answer.</p>
+      <div class="three">
+        <div><b>${pct}%</b><span>Score</span></div>
+        <div><b>${rows.filter(x=>x.ok).length}</b><span>Fully correct</span></div>
+        <div><b>${fmt(e.left)}</b><span>Time left</span></div>
+      </div>
+      <p style="margin-top:18px">
+        <button onclick="active=${e.uid};go('study')">Review notes</button>
+        <button class="gold" onclick="active=${e.uid};go('exam')">Try again</button>
+      </p>
+    </div>
+    <div class="head">
+      <label>DETAILED ANSWER REVIEW</label>
+      <h2>Corrections and Explanations</h2>
+      <p class="muted">Each question shows your answer, the correct answer, and the reason / explanation.</p>
+    </div>
+    ${rows.map((x,j) => `
+      <article class="q review-q">
+        <div class="qtop">
+          QUESTION ${j+1} · ${x.m} / ${x.max} MARKS · 
+          <span class="${x.ok?'text-good':'text-bad'}">${x.ok?'✓ Correct':'✗ Incorrect'}</span>
+        </div>
+        <h3>${x.q.q}</h3>
+        <div class="review-block">
+          <div class="review-line">
+            <span class="review-label">Your answer</span>
+            <span class="review-ans ${x.ok?'good':'bad'}">${studentAnswerText(x.q, x.a)}</span>
+          </div>
+          ${!x.ok ? `
+          <div class="review-line">
+            <span class="review-label">Correct answer</span>
+            <span class="review-ans correct">${correctAnswerText(x.q)}</span>
+          </div>` : ''}
+          <div class="review-why">
+            <b>Why / explanation:</b> ${x.q.why}
+          </div>
+        </div>
+      </article>`).join('')}`;
+  scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
